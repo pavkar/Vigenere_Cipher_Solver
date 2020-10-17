@@ -1,0 +1,14 @@
+
+U	java:S106x"9Replace this use of System.out or System.err by a logger.(¦½¶ï8¬±äàÒ.
+V	java:S106Œ"9Replace this use of System.out or System.err by a logger.(‡›–8¬±äàÒ.
+Z	java:S106k"9Replace this use of System.out or System.err by a logger.(£öÅ¦ıÿÿÿÿ8¬±äàÒ.
+U	java:S1061"9Replace this use of System.out or System.err by a logger.(é‘şï8¬±äàÒ.
+V
+java:S2864C"4Iterate over the "entrySet" instead of the "keySet".(êŒ¢æøÿÿÿÿ8¬±äàÒ.
+Z	java:S106""9Replace this use of System.out or System.err by a logger.(®ıáëûÿÿÿÿ8»‘¦èÒ.
+Z	java:S106"9Replace this use of System.out or System.err by a logger.(ä¾¬ñşÿÿÿÿ8¬±äàÒ.
+X	java:S125$"<This block of commented-out lines of code should be removed.(”ü³Ï8”Ô¤çÒ.
+T	java:S106="9Replace this use of System.out or System.err by a logger.(³İôE8¬±äàÒ.
+Z	java:S106-"9Replace this use of System.out or System.err by a logger.(­¤…µüÿÿÿÿ8¬±äàÒ.
+Z	java:S106F"9Replace this use of System.out or System.err by a logger.(Ü¿òçûÿÿÿÿ8¬±äàÒ.
+U	java:S106_"9Replace this use of System.out or System.err by a logger.(´¯§¶8¯Û£çÒ.
