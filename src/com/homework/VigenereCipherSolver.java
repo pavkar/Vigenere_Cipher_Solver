@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class VigenereCipherSolver {
 
@@ -123,18 +124,13 @@ public class VigenereCipherSolver {
 
     public static Map<Integer, String> separateEncryption(String encryption, int keyLength) {
         Map<Integer, String> values = new HashMap<>();
+        IntStream.range(0, keyLength).forEach(key -> values.put(key, ""));
         for (int i = 0; i < encryption.length(); i++) {
-            if (i * keyLength <= encryption.length() - 1) {
-                for (int y = 0; y < keyLength; y++) {
+            for (int y = 0; y < keyLength; y++) {
+                if (i * keyLength < encryption.substring(y).length()) {
                     char valueChar = encryption.substring(y).charAt(i * keyLength);
-                    if (values.containsKey(y)) {
-                        values.put(y, values.get(y) + valueChar);
-                    } else {
-                        values.put(y, Character.toString(valueChar));
-                    }
+                    values.put(y, values.get(y) + valueChar);
                 }
-            } else {
-                break;
             }
         }
         System.out.println(values);
