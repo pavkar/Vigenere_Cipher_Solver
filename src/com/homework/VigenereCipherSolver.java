@@ -17,26 +17,52 @@ public class VigenereCipherSolver {
     public static void main(String[] args) throws IOException {
         List<Character> alphabet = ALPHABET.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Input encrypted text");
-        String encryption = reader.readLine();
+        findCombinationOfLetters("IPGKQSTBIMWJDVYLCORRNNGERJXSUSXLRKPKTQWVYEOUUYSSIYFWWUDTSOXOXNVGWJDKJSHSAGOYDSEEWTHABJBIKBJXSPDXYCOKYESTGMTQJGFJOPKIGSTCFCMOKDFGGDMPGACYPAOYIPFPMWJDVYLCORRDSOUPTNIUOIZBDENWRKXLLGQESOTQESOOVSTYHQKHSWGFJEVKCLZONSSAOTDNNINKWEVGYSWMCCXFARDNZBOKIPODYZEOPKIGSTCFCMKCNEGEYRAIVKYTCPKQLPKVNEMVIUTQCVQJCPOFDGWWJDHJOFOJGBXLFARFDOEVFDGKMFWQQWUFHGBFYRKCWPGVBNNHGNYZFCXIZAKJJODQVDYCOSFWHKWJMIVSKZBGXTHOUCZXSUDMLHVRJLRXOWDOTIMLGCAZLBVERNCOZZESTDMPBYRNNVEVFDGKMFWQTIUECUIXESOCFCSUOHFFGKSOKJSHSOTOSZHSEFYHWWHZAREYLHKYSFGGCWFZGCBSWERFCSPOBLBFESTBVENEWXOXZAGCZMFQEYTBGCXFQJKXNCOZZEWPQYSSSEFYHWWKZITSJCHTKSDTQBRNOPLJASTPTCAGNJIDQXJYHKKQWMHKXESTDMLBDIHWOUCNNONMTXDWDJCGJYBPJGBYSWUSXYCVPTCTTOJEVGWJEVQNXECKXUFHCXIZIVZZEHJOILHCPWZAVRJQCWBNPFVBFYGHYWXOTOAPFABJDHTSHESFRJYQGPNYRKXLBICXYFACVLZFKDMXGTOQTSUYSHONUNYUCPNYSNSSPPGDBPSPEXTBIOCEFCZTHSTGMTZGLJTBIVNXWVOITBUYRPWOZTCHCXYHOAC");
+//
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        System.out.println("Input encrypted text");
+//        String encryption = reader.readLine();
+//
+//        Map<Character, Double> commonFrequency = getCommonLetterFrequencies();
+//
+//        List<Integer> valuesPlace = separateEncryption(encryption, 5).values().stream()
+//                .map(separatedValue ->
+//                        calculateFrequencySum(alphabet, findFrequency(countLetters(separatedValue), separatedValue.length()), commonFrequency))
+//                .map(entryset -> findMaxValue(entryset).getKey()).collect(Collectors.toList());
+//
+//        StringBuilder key = new StringBuilder();
+//        for (int keyElement : valuesPlace) {
+//            key.append(alphabet.get(keyElement));
+//        }
+//
+//        System.out.println(key.toString());
+//        decrypt(encryption, key.toString());
+//
+//        putGapsIntoText(decrypt(encryption, key.toString()));
+//        decrypt("ABCDE", "BCDEF");
 
-        Map<Character, Double> commonFrequency = getCommonLetterFrequencies();
+    }
 
-        List<Integer> valuesPlace = separateEncryption(encryption, 5).values().stream()
-                .map(separatedValue ->
-                        calculateFrequencySum(alphabet, findFrequency(countLetters(separatedValue), separatedValue.length()), commonFrequency))
-                .map(entryset -> findMaxValue(entryset).getKey()).collect(Collectors.toList());
+    public static List<String> findCombinationOfLetters(String code) {
+        Map<String, Integer> combinations = new HashMap<>();
+        Map<String, List<Integer>> positions = new HashMap<>();
 
-        StringBuilder key = new StringBuilder();
-        for (int keyElement : valuesPlace) {
-            key.append(alphabet.get(keyElement));
+        for (int i = 0; i < code.length() - 2; i++) {
+            String lettersCombo = code.substring(i, 3 + i);
+            if (combinations.containsKey(lettersCombo)) {
+                combinations.put(lettersCombo, combinations.get(lettersCombo) + 1);
+                List<Integer> pos = positions.get(lettersCombo);
+                pos.add(i);
+                positions.put(lettersCombo, pos);
+            } else {
+                combinations.put(lettersCombo, 1);
+                positions.put(lettersCombo, new ArrayList<>(i));
+            }
         }
-
-        System.out.println(key.toString());
-        decrypt(encryption, key.toString());
-
-        putGapsIntoText(decrypt(encryption, key.toString()));
+        List<String> repeatingLetters = combinations.entrySet().parallelStream().filter(set -> set.getValue() > 1).map(Map.Entry::getKey).collect(Collectors.toList());
+        System.out.println(repeatingLetters);
+        System.out.println(positions);
+        return repeatingLetters;
     }
 
     public static void findCommon(String first, String second) {
